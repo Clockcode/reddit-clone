@@ -28,6 +28,9 @@
     - If you only work with the JSON representation in your application, PostgreSQL is only used to store & retrieve this representation, you should use json.
 - jsonb is stored in some binary representation
     - If you do a lot of operations on the JSON value in PostgreSQL, or use indexing on some JSON field, you should use jsonb
+- Migration is a single SQL query to update database schema
+- A Relation Schema is the blueprint of the table. It declares the table and its columns
+- A Database Schema is the blueprint of the whole database. It consists of multiple relation schemas.
 
 ## Javascript
 ### Promise
