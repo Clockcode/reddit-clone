@@ -3,9 +3,9 @@ import { __prod__ } from "./constants";
 import { Post } from "./entities/Post";
 import mikroConfig from "./mikro-orm.config";
 import express from "express";
-import {ApolloServer} from "apollo-server-express"
-import {buildSchema} from "type-graphql"
-import {HelloResolver} from "./resolvers/hello"
+import { ApolloServer } from "apollo-server-express";
+import { buildSchema } from "type-graphql";
+import { HelloResolver } from "./resolvers/hello";
 const main = async () => {
   // Connects to the database
   const orm = await MikroORM.init(mikroConfig);
@@ -21,15 +21,16 @@ const main = async () => {
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
       resolvers: [HelloResolver],
-      validate: false
-    })
-  })
-apolloServer.applyMiddleware({app})
-  app.listen("4000", () => {
-    console.log("Server listening on localhost:4000")
+      validate: false,
+    }),
   });
 
-  const posts = await orm.em.find(Post, {});
-  console.log(posts);
+  apolloServer.applyMiddleware({ app });
+  app.listen("4000", () => {
+    console.log("Server listening on localhost:4000");
+  });
+
+  // const posts = await orm.em.find(Post, {});
+  // console.log(posts);
 };
 main().catch((err) => console.error(err));
